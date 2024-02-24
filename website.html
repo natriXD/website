@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TitanLab</title>
+
+    <style>
+        html {
+            overflow-x: hidden;
+        }
+        
+        body {
+            width: 100%;
+            /* Измените значение на необходимое вам */
+            margin: 0 auto;
+            /* Центрирует контент по горизонтали */
+        }
+        
+        header {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            color: #fff;
+            z-index: 3;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .header-image {
+            margin-right: 36%;
+            /* Регулирует расстояние между картинкой и заголовком */
+            width: 50px;
+        }
+        
+        .header-title {
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .header-actions {
+            margin-left: auto;
+            /* Делает корзину и кнопку справа от заголовка */
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-icon {
+            margin-right: 10px;
+            /* Регулирует расстояние между иконкой корзины и кнопкой */
+        }
+        
+        .leave-request-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        nav {
+            overflow-x: hidden;
+            background-color: #c0c0c0;
+            text-align: center;
+            justify-content: space-around;
+            /* Выравнивание элементов по горизонтали */
+            border: none;
+            cursor: pointer;
+            /* Плавное изменение цвета фона при наведении */
+            font-weight: bold;
+            background-color: #cccccc;
+            position: fixed;
+            top: 80px;
+            /* Выравниваем навигацию с учетом высоты заголовка */
+            left: 0;
+            width: 100%;
+            display: flex;
+            color: #fff;
+            z-index: 1;
+        }
+        
+        .navbar {
+            position: fixed;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #111;
+            text-align: center;
+            font-size: 24px;
+            padding: 10px;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            font-family: Arial Black;
+        }
+        
+        .navbar_animation {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            z-index: 0;
+            background-color: rgb(223, 223, 223);
+            border-radius: 50px;
+            transition: 0.7s ease-in-out;
+        }
+        
+        footer {
+            background-color: #adadad;
+            color: white;
+            text-align: center;
+            width: auto;
+            padding: 20px;
+        }
+        
+        .product-description {
+            text-align: left;
+        }
+        
+        .product-description p {
+            margin: 0;
+            text-indent: 70px;
+            /* Убираем внешний отступ у абзацев для более компактного размещения */
+        }
+        
+        .services-section {
+            background-color: #ffffff;
+            padding: 60px;
+            border-radius: 10px;
+            top: 500px;
+        }
+        
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .feature-section {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f8f8f800;
+        }
+        
+        .imagenavigation {
+            width: 100%;
+            /* Это сохранит пропорции изображения */
+            padding-top: 100px;
+            z-index: -3000;
+        }
+        
+        .feature-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            position: relative;
+        }
+        
+        .additional-info {
+            display: block;
+            margin-left: 5px;
+        }
+        
+        .feature-item.delivery::before {
+            background-image: url('Доставка.png');
+        }
+        
+        .title {
+            font-weight: bold;
+            color: black;
+        }
+        
+        .additional-info {
+            display: table;
+            margin: 0 auto;
+            /* для центрирования display: table; не нужно указывать ширину блока, она рассчитывается самостоятельно */
+            white-space: pre-line;
+            /* не нужен <br> */
+            word-wrap: break-word;
+            /* чтобы слова переносились на маленьком экране */
+            margin-right: 50%;
+        }
+        
+        .product-section {
+            text-align: start;
+        }
+        
+        .product-block {
+            display: inline-block;
+            background-color: #f0f0f0;
+            /* Фоновый цвет блока */
+            padding: 20px;
+            /* Поля вокруг блока */
+            border-radius: 8px;
+            /* Скругление углов */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Тень блока */
+            text-align: center;
+            margin-left: 100px;
+            font-family: VERDANA;
+        }
+        
+        .product-block img {
+            width: auto;
+            /* Размер изображения */
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #979797;
+            /* Цвет фона кнопки */
+            color: white;
+            /* Цвет текста кнопки */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            /* Плавное изменение цвета фона при наведении */
+            width: 100%;
+            font-family: "ms sans serif", sans-serif;
+        }
+        
+        button:hover {
+            background-color: #9d9d9d;
+            /* Цвет фона при наведении */
+        }
+        
+        .product-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .title-product {
+            font-size: 30px;
+            margin-left: 80px;
+            padding: 20px;
+        }
+        
+        .colored-section {
+            background-color: #f0f0f0;
+            padding: 50px;
+        }
+        
+        footer {
+            background-color: #d6d6d6;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .rating {
+            font-weight: bold;
+        }
+        
+        section {
+            text-align: center;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            font-size: 40px;
+            margin-bottom: 10px;
+            padding: 30px;
+        }
+        
+        .section-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-direction: column;
+        }
+        
+        .additional-info {
+            font-size: 30px;
+        }
+        
+        .slider-container {
+            width: 50%;
+            margin: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            margin: 0;
+        }
+        
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            margin-right: 0;
+        }
+        
+        .review {
+            width: calc(34% - 20px);
+            margin-right: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        
+        .nickname {
+            font-size: 20px;
+            font-family: Arial Black;
+            margin-bottom: 5px;
+        }
+        
+        .rating {
+            font-size: 24px;
+            color: gold;
+            margin-bottom: 5px;
+        }
+        
+        .text {
+            font-family: Trebuchet MS;
+            font-size: 14px;
+        }
+        
+        .read-more-content {
+            overflow: hidden;
+            max-height: 100px;
+            /* Максимальная высота текста до "Читать полностью" */
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .read-more-trigger {
+            cursor: pointer;
+            display: block;
+            padding: 5px;
+            color: blue;
+        }
+        
+        .read-more-trigger.expanded {
+            display: none;
+        }
+        
+        .arrows {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .prev,
+        .next {
+            position: absolute;
+            top: 390%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #adadad;
+            width: 30px;
+            height: 35px;
+        }
+        
+        .prev {
+            left: 23%;
+        }
+        
+        .next {
+            right: 22%;
+        }
+        
+        .cart img {
+            width: auto;
+            height: auto;
+            margin-right: 20px;
+            fill: rgb(4, 0, 255);
+            /* Цвет иконки корзины */
+            position: relative;
+        }
+        
+        .info-text {
+            text-align: center;
+            font-size: 24px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            /* Положим окно поверх мутного фона */
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            background-color: rgba(182, 182, 182, 0.5);
+            padding: 30px;
+            border-radius: 60px;
+            text-align: center;
+        }
+        
+        .modal-content p {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .form-input {
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            text-align: left;
+            margin-left: 300px;
+            font-weight: bold;
+            color: black;
+        }
+        
+        .social-icons {
+            text-align: left;
+            margin-left: 300px;
+        }
+        
+        .primary-button,
+        .secondary-button {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            padding: 5px 20;
+            /* Расстояние между кнопками */
+            font-size: 14px;
+            /* Rectangle 18 */
+            width: 200px;
+            height: 40px;
+            left: 406px;
+            background: #000000;
+            border-radius: 4px;
+        }
+        
+        .info-age {
+            font-size: 10px;
+            padding: 10px;
+        }
+        
+        .form-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            /* Положим окно поверх мутного фона */
+            backdrop-filter: blur(10px);
+        }
+        
+        .close {
+            position: absolute;
+            top: 300px;
+            left: 55%;
+            right: 0;
+            cursor: pointer;
+            font-size: 20px;
+            color: #000000;
+            padding: 10px;
+            width: 10px;
+            border-radius: 50%;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+        }
+        
+        .form-container {
+            max-width: 300px;
+            border-radius: 40px;
+            font-size: 24px;
+            margin-left: 40%;
+            margin-top: 15%;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            z-index: 2;
+        }
+        
+        .form-container label {
+            display: block;
+            margin: 10px 0;
+        }
+        
+        .form-container input[type=text],
+        .form-container input[type=text],
+        .form-container input[type=telegram],
+        .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 10px 0;
+            display: inline-block;
+            border-radius: 10px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.5);
+            z-index: 1;
+        }
+        
+        .form-container button {
+            background-color: #444444;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 70%;
+        }
+        
+        .form-container button:hover {
+            opacity: 0.8;
+        }
+        
+        #prev-btn,
+        #next-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        #prev-btn:hover,
+        #next-btn:hover {
+            color: #4CAF50;
+        }
+        
+        .cart-container {
+            display: none;
+            /* Начинаем с скрытой корзины */
+            position: fixed;
+            /* Вы можете настроить положение корзины */
+            top: 10%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-container {
+            /* Ваши стили для контейнера с картинкой */
+            position: relative;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .column {
+            display: flex;
+            flex-direction: column;
+            padding: px;
+        }
+        
+        .column a {
+            text-decoration: none;
+            color: #333;
+            margin-bottom: 10px;
+            margin-left: 40px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            padding-top: -60px;
+            margin-top: -30px;
+        }
+        
+        .column img {
+            max-width: 80px;
+            /* Регулируйте размер изображения по вашему усмотрению */
+            margin-right: 10px;
+            /* Расстояние между изображением и текстом */
+        }
+        
+        .title-document {
+            font-size: 24px;
+            font-family: Arial Black;
+        }
+        
+        .prev-btn,
+        .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(155, 155, 155, 0.5);
+            /* Пример прозрачности */
+            backdrop-filter: blur(15px);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border: none;
+            color: rgb(30, 30, 30);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: 10%;
+            background-repeat: no-repeat;
+        }
+        
+        .prev-btn {
+            left: 20px;
+            background-image: url('');
+        }
+        
+        .next-btn {
+            right: 20px;
+            background-image: url('path/to/right-arrow-image.png');
+        }
+        
+        .prev-btn:hover,
+        .next-btn:hover {
+            transition: cubic-bezier(0.39, 0.575, 0.565, 1);
+            background-color: rgb(255, 0, 242);
+        }
+        
+        .slider {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s;
+        }
+        
+        .nextrewievBtn {
+            cursor: pointer;
+            color: #ffffff;
+            padding: 10px 16px;
+            text-align: center;
+            text-decoration: none;
+            margin: 4px 2;
+            width: 32px;
+            position: relative;
+            top: -140px;
+        }
+        
+        .prevrewievBtn {
+            cursor: pointer;
+            color: #ffffff;
+            padding: 10px 16px;
+            text-align: center;
+            text-decoration: none;
+            margin: 4px 2;
+            width: 32px;
+            position: relative;
+            top: -140px;
+            margin-right: 30%;
+        }
+        
+        .review-slide {
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .read-more-content {
+            overflow: hidden;
+            max-height: 100px;
+            /* Максимальная высота текста до "Читать полностью" */
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .read-more-trigger {
+            cursor: pointer;
+            display: block;
+            padding: 5px;
+            color: blue;
+        }
+        
+        .read-more-trigger.expanded {
+            display: none;
+        }
+        
+        .product-slider-container {
+            overflow-x: hidden;
+            width: 81.7%;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .product-slider-wrapper {
+            display: flex;
+            /* Размещаем слайды в строку */
+        }
+        
+        .product-slider {
+            display: flex;
+            width: fit-content;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-block {
+            flex: 0 0 auto;
+            width: 250px;
+        }
+        
+        .nextslides {
+            position: relative;
+            top: -60%;
+            left: 97%;
+            width: 50px;
+            /* Регулирует отступ от правого края */
+            transform: translateY(-200px);
+            z-index: 0;
+            color: #000000;
+            font-size: 20px;
+            background-color: #c5c5c5;
+        }
+        
+        .nextslides1 {
+            position: relative;
+            top: -60%;
+            left: 97%;
+            width: 50px;
+            /* Регулирует отступ от правого края */
+            transform: translateY(-200px);
+            z-index: 0;
+            color: #000000;
+            font-size: 20px;
+            background-color: #c5c5c5;
+        }
+        
+        .nextslides2 {
+            position: relative;
+            top: -60%;
+            left: 97%;
+            width: 50px;
+            /* Регулирует отступ от правого края */
+            transform: translateY(-200px);
+            z-index: 0;
+            color: #000000;
+            font-size: 20px;
+            background-color: #c5c5c5;
+        }
+        
+        .nextslides3 {
+            position: relative;
+            top: -60%;
+            left: 97%;
+            width: 50px;
+            /* Регулирует отступ от правого края */
+            transform: translateY(-200px);
+            z-index: 0;
+            color: #000000;
+            font-size: 20px;
+            background-color: #c5c5c5;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+        <div class="header-content" id="header">
+            <img src="ap23pa.png" alt="Your Image" style="margin-left: 100px;" class="header-image">
+            <font size="6" color="black" face="Arial black">TITAN LAB</font>
+            <div class="header-actions">
+                <div class="cart">
+                    <img src="Vector.png" alt="Корзина" id="cart-image" onmouseover="showCart()" onmouseout="hideCart()">
+                    <div class="cart" id="cart">
+                        <span id="cart-count">0</span>
+
+                    </div>
+
+
+
+                </div>
+
+                <button style="margin-right: 80px;" onclick="openForm()">Оставить Заявку</button>
+
+                <div id="myForm" class="form-popup" style="z-index: 500;">
+                    <div class="form-content">
+                        <span class="close" onclick="closeForm()">&times;</span>
+                        <form action="submit.php" class="form-container" method="POST">
+                            <h3 style="font-family: Arial Black; color: #111;">Оставить заявку</h2>
+                                <input type="text" placeholder="Ваше имя*" name="name" required>
+                                <input type="text" placeholder="Номер телефона*" name="phone" required>
+                                <input type="text" placeholder="Телеграм для связи*" name="telegram" required>
+                                <p style="font-size: 13px; font-family: Arial Black; color: #000000;">*Нажимая на кнопку, Вы соглашаетесь на обработку персональных данных.</p>
+                                <button type="submit" class="btn">Отправить</button>
+                        </form>
+                    </div>
+                </div>
+    </header>
+    <div id="ageModal" class="modal" style="z-index: 3;">
+        <div class="modal-content">
+            <img class="image-content" src="лого с названием.png" alt="logo">
+            <p style="font-family: Arial Black;">Подтвердите что Вам больше 18 лет.</p>
+            <div class="button-container">
+                <button class="primary-button" onclick="confirmAge()">Мне больше 18 лет</button>
+                <button class="secondary-button" onclick="rejectAge()">Мне меньше 18 лет</button>
+            </div>
+            <div class="info-age" style="font-family: Arial Black;">
+                <h1>Сайт носит информационный характер и не рекламирует табачную продукцию. Вся информация представлена в целях ознакомления,<br> а не агитации или рекламирования товара.<br></h1>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <nav class="navbar">
+        <a class="nav-item active" href="#imagenavigation">Главная</a>
+        <a class="nav-item" href="#product">Каталог</a>
+        <a class="nav-item" href="#about-company">О Компании</a>
+        <a class="nav-item" href="#reviews">Отзывы</a>
+        <a class="nav-item" href="#contact">Контакты</a>
+        <div class="navbar_animation"></div>
+    </nav>
+
+
+    <div class="slider-container-img">
+        <div class="slider" id="imagenavigation">
+            <img class="imagenavigation" src="370d6633-4c4d-402e-a1a4-f31d19c551e6.jpg" alt="ElfBar">
+            <img class="imagenavigation" src="" alt="Image 2">
+            <img class="imagenavigation" src="" alt="Image 3">
+        </div>
+    </div>
+    <button class="prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next-btn" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <section class="feature-section">
+        <div class="feature-container">
+            <div class="feature-item delivery">
+                <img class="feature-item.delivery::before" src="Доставка.png" alt="ElfBar" style="margin: 20px;">
+                <p>
+                    <font size="5" color="black" face="Arial black">Доставка</font> <span class="additional-info" style="font-size: 20px;">Дополнительная<br> информация<br></span>
+                </p>
+            </div>
+            <div class="feature-item quality-guarantee">
+
+                <img class="feature-item.delivery::before" src="Галочка.png" alt="ElfBar" style="margin: 20px;">
+                <p>
+                    <font size="5" color="black" face="Arial black">Гарантия качества</font> <span class="additional-info" style="font-size: 20px;">Дополнительная<br> информация<br></span>
+
+
+                </p>
+            </div>
+
+            <div class="feature-item discount">
+                <img class="feature-item.delivery::before" src="Скидка.png" alt="ElfBar" style="margin: 20px;">
+                <p>
+
+                    <font size="5" color="black" face="Arial black">Скидка 10%</font> <span class="additional-info " style="font-size: 20px;">Дополнительная<br> информация<br></span>
+                </p>
+
+            </div>
+        </div>
+    </section>
+    <section class="product-section " id="product">
+        <h2 class="title-product " style="font-family: Arial Black; margin-bottom: 60px; margin-left: 8%; ">Электронные сигареты</h2>
+        <div class="product-slider-container">
+            <div class="product-slider-wrapper">
+                <div class="product-slider">
+                    <div class="product-block">
+                        <img src="f49c6492-f23b-4253-8eaa-b456ca3ce0d4.jpg " alt="Product 1 ">
+                        <p class="product-title ">WAKA</p>
+                        <button>Подробнеe</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="a1953caa-c3a4-40a9-94f6-0f6d27f94d2e (1).jpg " alt="Product 1 ">
+                        <p class="product-title ">PLONQ</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="a1953caa-c3a4-40a9-94f6-0f6d27f94d2e (1).jpg " alt="Product 1 ">
+                        <p class="product-title ">WAKA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="a1953caa-c3a4-40a9-94f6-0f6d27f94d2e (1).jpg  " alt="Product 1 ">
+                        <p class="product-title ">WAKA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="a1953caa-c3a4-40a9-94f6-0f6d27f94d2e (1).jpg  " alt="Product 1 ">
+                        <p class="product-title ">WAKA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="a1953caa-c3a4-40a9-94f6-0f6d27f94d2e (1).jpg  " alt="Product 1 ">
+                        <p class="product-title ">WAKA</p>
+                        <button>Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="nextslides" onclick="moveSlide(1)">❯</button>
+        </div>
+    </section>
+
+
+    <section class="product-section">
+        <h2 class="title-product" style="font-family: Arial Black; margin-left: 8%;">Жевательный табак</h2>
+        <div class="product-slider-container">
+            <div class="product-slider-wrapper">
+                <div class="product-slider" id="product-slider-2">
+                    <div class="product-block">
+                        <img src="01bf5b87-ace8-4c88-8f46-5b9990d8db36.jpg" alt="Product 1">
+                        <p class="product-title">ODENS</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="08a0a356-032c-4626-abe3-4b4f5d5ba2a8 (1).jpg" alt="Product 1">
+                        <p class="product-title">SIBERIA</p>
+                        <button onclick="openProductDetails()">Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="01bf5b87-ace8-4c88-8f46-5b9990d8db36.jpg" alt="Product 1">
+                        <p class="product-title">ODENS</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="01bf5b87-ace8-4c88-8f46-5b9990d8db36.jpg" alt="Product 1">
+                        <p class="product-title">ODENS</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="01bf5b87-ace8-4c88-8f46-5b9990d8db36.jpg" alt="Product 1">
+                        <p class="product-title">ODENS</p>
+                        <button>Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="nextslides1" onclick="moveSlide(1)">❯</button>
+    </section>
+
+    <section class="product-section">
+        <h2 class="title-product" style="font-family: Arial Black; margin-left: 8%;">IQOS</h2>
+        <div class="product-slider-container">
+            <div class="product-slider-wrapper">
+                <div class="product-slider" id="product-slider-3">
+                    <div class="product-block">
+                        <img src="80b43fb3-9cd7-431b-a737-e1ffd177a62c.jpg" alt="Product 1">
+                        <p class="product-title">ILUMA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="7ec293ac-387f-4733-a21b-c3cc80600382.jpg" alt="Product 1">
+                        <p class="product-title">ILUMA PRIME</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="7ec293ac-387f-4733-a21b-c3cc80600382.jpg" alt="Product 1">
+                        <p class="product-title">ILUMA PRIME</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="7ec293ac-387f-4733-a21b-c3cc80600382.jpg" alt="Product 1">
+                        <p class="product-title">ILUMA PRIME</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="7ec293ac-387f-4733-a21b-c3cc80600382.jpg" alt="Product 1">
+                        <p class="product-title">ILUMA PRIME</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block">
+                        <img src="7ec293ac-387f-4733-a21b-c3cc80600382.jpg" alt="Product 1">
+                        <p class="product-title">ILUMA PRIME</p>
+                        <button>Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="nextslides2" onclick="moveSlide(1)">❯</button>
+    </section>
+
+
+    <section class="product-section ">
+        <h2 class="title-product " style="font-family: Arial Black; margin-left: 8%; ">Стики</h2>
+        <div class="product-slider-container">
+            <div class="product-slider-wrapper">
+                <div class="product-slider" id="product-slider-4">
+                    <div class="product-block ">
+                        <img src="5e51c64d-e879-4071-9105-bae4ac24d567.jpg " alt="Product 1 ">
+                        <p class="product-title ">TEREA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="5e51c64d-e879-4071-9105-bae4ac24d567.jpg " alt="Product 1 ">
+                        <p class="product-title ">TEREA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="5e51c64d-e879-4071-9105-bae4ac24d567.jpg " alt="Product 1 ">
+                        <p class="product-title ">TEREA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="5e51c64d-e879-4071-9105-bae4ac24d567.jpg " alt="Product 1 ">
+                        <p class="product-title ">TEREA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="5e51c64d-e879-4071-9105-bae4ac24d567.jpg " alt="Product 1 ">
+                        <p class="product-title ">TEREA</p>
+                        <button>Подробнее</button>
+                    </div>
+                    <div class="product-block ">
+                        <img src="5e51c64d-e879-4071-9105-bae4ac24d567.jpg " alt="Product 1 ">
+                        <p class="product-title ">TEREA</p>
+                        <button>Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="nextslides3" onclick="moveSlide(1)">❯</button>
+    </section>
+
+    <section class="about-company-section ">
+        <h2 class="section-title " style="font-family: Arial Black; " id="about-company">О компании</h2>
+        <div class="section-content ">
+
+
+            <div class="info-text " style="font-family: trebuchet ms; margin-left: 90px; margin-right: 90px " ;>Titan Lab - это компания занимающаяся оптовыми и розничными продажами с 2018 года. На нашем счету уже более 1000 успешных сделок и 99% положительных отзывов от покупателей. Наша команда тщательно подходит к выбору товара. Именно поэтому мы
+                работаем напрямую с производителями, что дает гарантию качества нашей продукции. В нашем ассортименте более 500 позиций различных табачных изделий и электронных девайсов: от всеми известных до эксклюзивных брендов. Вся лучшая табачная
+                продукция и девайсы для курения собраны в одном месте, чтобы сделать ваш выбор проще и доступнее. Накопленные знания помогают уверенно подбирать для вас продукцию по вкусу и крепости, под настроение и желания.</div>
+        </div>
+        <div id="reviews ">
+            <h1 class=" review-info " style="font-family: Arial Black; font-size:45px; margin-top: 40px;" id="reviews">Отзывы</h1>
+            <div class="slider-container ">
+
+
+                <div class="slides">
+                    <div class="slide ">
+                        <div class="review ">
+                            <img class="avatar " src="Доставка.png " alt="Аватар 1 ">
+                            <p class="nickname " style="font-size: 20px; font-family: Arial Black; ">ДЫМДымский</p>
+                            <p class="rating " style="font-size: 24px; ">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+                                <p class="text " style="font-family: Trebuchet MS; "><br>Заказала себе недавно электронные сигареты WAKA и осталась очень довольна!<br> Во-первых, устройство отличается крутым дизайном и удобной формой, во-вторых, были на связи в течении всей цепочки от оплаты счета до сверения
+                                    кодов. Рекомендую всем, кто переходит на работу в белую. Доставили через 7 дней, как и говорили. Доставкой довольна.</p>
+
+                        </div>
+                        <div class="review">
+                            <img class="avatar " src="Доставка.png " alt="Аватар 2 ">
+                            <p class="nickname " style="font-size: 20px; font-family: Arial Black; ">Царь Пар</p>
+                            <p class="rating " style="font-size: 24px; ">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                            </p>
+                            <p class="text " style="font-family: Trebuchet MS; ">Интересная вещь, для тех кто устал от сигарет и электронок многие с помощью него бросают курить. Много разных позиций по по вкусу, брендам и граммам. Лучше всего у нас продаются позиции по 16 грамм.Самый популярный на данный
+                                момент это оденс колд драй 16 мг никотина, хорошее качество продукта и хорошая маржинальность для акцизных товаров.Поставщику спасибо за оперативность, желаем дальнейшего процветания!</p>
+                        </div>
+                        <div class="review ">
+                            <img class="avatar " src=" " alt="Аватар 3 ">
+                            <p class="nickname " style="font-size: 20px; font-family: Arial Black; ">Денис Погодин</p>
+                            <p class="rating " style="font-size: 24px; ">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                            </p>
+                            <p class="text " style="font-family: Trebuchet MS; " id="review2Text ">Курю уже более 2-х лет, срок не большой, очень хочу бросить. Думаю, что данный продукт достаточно эффективен как способ просить курить. В основном зависимость возникает не от никотина, а от привычки что-либо потянуть. Я не
+                                думаю, что электронная сигарета может помочь лучше, чем жевательный табак, так как она не избавляет от привычки тянуть что-то. Жевательный табак содержит достаточно никотина для того...</p>
+                            <span class="read-more-trigger " onclick="toggleText( 'review2Text') ">Читать полностью</span>
+                            <div id="review2Text" style="display: none;">
+                                <!-- Здесь ваш текст -->
+                                Интересная вещь, для тех кто устал от сигарет и электронок многие с помощью него бросают курить.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide ">
+                        <div id="contact "></div>
+                        <div class="review ">
+                            <img class="avatar " src=" " alt="Аватар 5 ">
+                            <p class="nickname ">Никнейм 5</p>
+                            <p class="rating ">Рейтинг: 4 звезды</p>
+                            <p class="text ">Текст отзыва 5</p>
+                        </div>
+                        <div class="review ">
+                            <img class="avatar " src=" " alt="Аватар 6 ">
+                            <p class="nickname ">Никнейм 6</p>
+                            <p class="rating ">Рейтинг: 3 звезды</p>
+                            <p class="text ">Текст отзыва 6</p>
+                            <div class="slide ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="prev" onclick="prevSlide() " style="margin-top: 8%;">&#10094;</div>
+            <div class="next" onclick="nextSlide() " style="margin-top: 8%;">&#10095;</div>
+
+            <h1 class="title-document ">Документы и сертификаты</h1>
+            <div class="container ">
+
+                <div class="column " id="column1 ">
+                    <a class="document " href="Новый-документ.pdf " download>
+                        <img src="вк.png " alt="Картинка 1 ">
+                        <p style="font-family: Arial Black; ">Свидетельство Роспатента о торговой марке</p>
+                    </a>
+
+                    <a class="document " href="Новый-документ.pdf " download>
+                        <img src="вк.png " alt="Картинка 2 ">
+                        <p style="font-family: Arial Black; ">Декларация о соответствии УПД с номерами</p>
+                    </a>
+
+                    <a class="document " href="Новый-документ.pdf " download>
+                        <img src="вк.png " alt="Картинка 3 ">
+                        <p style="font-family: Arial Black; ">Честный знак</p>
+                    </a>
+                </div>
+
+                <div class="column " id="column2 ">
+                    <a class="document " href="Новый-документ.pdf " download>
+                        <img src="вк.png " alt="Картинка 4 " style="margin-bottom: 30px; ">
+                        <p style="font-family: Arial Black; margin-top: -10px; ">Декларация ЕАС</p>
+                    </a>
+
+                    <a class="document " href="Новый-документ.pdf " download>
+                        <img src="вк.png " alt="Картинка 5 " style="margin-bottom: 70px; ">
+                        <p style="font-family: Arial Black; margin-top: -56px; ">Сертификат Качества</p>
+                    </a>
+                </div>
+            </div>
+
+
+            <footer>
+                <div class="contact-info " style="font-family: Arial Black; margin-bottom: 7%; " id="contact">
+                    <h2>Контактная информация</h2>
+                    <!-- Добавьте вашу контактную информацию здесь -->
+                </div>
+
+                <div class="social-icons " style="margin-top: -160px; ">
+
+                    <a href="https://vk.com/natrixd " target="_blank "><img src="вк.png " alt="VK " style="margin-right: 20px; "></a>
+                    <a href="https://web.telegram.org/k/ " target="_blank "><img src="тг.png " alt="Telegram "></a>
+                    <a href="https://www.figma.com/file/critQet4LBfgkezNCOu5Ff/TitanLab?type=design&node-id=80-87&mode=design&t=IAinTDluUz9KLlmh-0 " target="_blank "><img src="Ватсап.png " alt="WhatsApp " style="margin-left: 20px; "></a>
+                    <img src="лого с названием.png " alt="WhatsApp " style="margin-left: 70%; ">
+                </div>
+            </footer>
+
+            <script>
+                document.addEventListener("DOMContentLoaded ", function() {
+                    var downloadTrigger = document.getElementById("downloadTrigger ");
+
+                    downloadTrigger.addEventListener("click ", function() {
+                        var downloadLink = document.createElement("a ");
+                        downloadLink.href = "Новый-документ.pdf "; // Замените на путь к вашему документу
+                        downloadLink.download = "Типы.pdf "; // Замените на желаемое имя файла
+
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                    });
+                });
+            </script>
+            <script>
+                // Проверяем, было ли уже показано окно
+                if (!localStorage.getItem('ageConfirmationShown')) {
+                    // Если окно еще не было показано, показываем его
+                    window.onload = function() {
+                        document.getElementById('ageModal').style.display = 'flex';
+                    };
+
+                    // Помечаем, что окно было показано
+                    localStorage.setItem('ageConfirmationShown', 'true');
+                }
+
+                // Функция для обработки ответа "Да"
+                function confirmAge() {
+                    document.getElementById('ageModal').style.display = 'none';
+                    // Записываем информацию о подтверждении возраста
+                    localStorage.setItem('ageConfirmed', 'true');
+                }
+
+                // Функция для обработки ответа "Нет"
+                function rejectAge() {
+                    alert('Вы должны быть старше 18 лет для доступа к сайту.');
+                    // Можно также перенаправить пользователя на другую страницу или выполнить другие действия
+                }
+            </script>
+            <script>
+                function openForm() {
+                    document.getElementById('myForm').style.display = "block ";
+                    // document.getElementById('.blur-background').style.display = "none "; // Не уверен, что этот блок нужен
+                }
+
+                function closeForm() {
+                    document.getElementById('myForm').style.display = "none ";
+                }
+
+                function submitForm() {
+                    var formData = new FormData(document.getElementById("applicationForm "));
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            if (xhr.status == 200) {
+                                // Ваши действия после успешной отправки формы
+                                alert("Заявка успешно отправлена! ");
+                                closeForm(); // Закрываем форму после успешной отправки
+                            } else {
+                                // Ваши действия в случае ошибки отправки формы
+                                alert("Произошла ошибка при отправке заявки. ");
+                            }
+                        }
+                    };
+
+                    xhr.open("POST ", "submit.php ", true);
+                    xhr.send(formData);
+                }
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const navbarLinks = document.querySelectorAll('.navbar a');
+
+                    // Устанавливаем обработчик событий для скролла
+                    window.addEventListener('scroll', function() {
+                        updateActiveNav();
+                    });
+
+                    navbarLinks.forEach(link => {
+                        link.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            navbarLinks.forEach(link => link.classList.remove('active'));
+                            this.classList.add('active');
+                            updateAnimationPosition(this);
+
+                            const targetId = this.getAttribute('href').substring(1);
+                            scrollToSection(targetId);
+                        });
+                    });
+
+                    function updateActiveNav() {
+                        const scrollPosition = window.scrollY;
+                        const navbar = document.querySelector('.navbar');
+                        const navbarHeight = navbar.offsetHeight;
+
+                        navbarLinks.forEach(link => {
+                            const targetId = link.getAttribute('href').substring(1);
+                            const targetSection = document.getElementById(targetId);
+
+                            if (targetSection) {
+                                let offset = 0;
+
+                                // Рассчитываем смещение в зависимости от способа скролла
+                                if (scrollPosition >= targetSection.offsetTop - navbarHeight - 130) {
+                                    offset = 200; // Если скролл произошел ручками
+                                } else {
+                                    offset = 200; // Если скролл был инициирован нажатием на кнопку навигации
+                                }
+
+                                // Увеличиваем отступ для элемента с ID "contact"
+                                if (targetId === 'contact') {
+                                    offset += 700; // Больший отступ для раздела "Контакты"
+                                }
+
+                                const targetSectionTop = targetSection.offsetTop - navbarHeight - offset;
+                                const targetSectionBottom = targetSectionTop + targetSection.offsetHeight;
+
+                                if (scrollPosition >= targetSectionTop && scrollPosition < targetSectionBottom) {
+                                    navbarLinks.forEach(link => link.classList.remove('active'));
+                                    link.classList.add('active');
+                                    updateAnimationPosition(link);
+                                }
+                            }
+                        });
+                    }
+
+                    function updateAnimationPosition(clickedLink) {
+                        const navbarAnimation = document.querySelector('.navbar_animation');
+                        const linkRect = clickedLink.getBoundingClientRect();
+                        navbarAnimation.style.width = `${linkRect.width}px`;
+                        navbarAnimation.style.left = `${linkRect.left}px`;
+                    }
+
+                    function scrollToSection(targetId) {
+                        const targetSection = document.getElementById(targetId);
+                        if (targetSection) {
+                            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                            window.scrollTo({
+                                top: targetSection.offsetTop - navbarHeight - 100, // Смещение на 50px вверх при скролле ручками
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            </script>
+
+            </script>
+
+            </script>
+            <script>
+            </script>
+
+            </script>
+            </script>
+            <script>
+                function toggleText(elementId) {
+                    var element = document.getElementById(elementId);
+                    if (element.style.display === 'none') {
+                        element.style.display = 'block';
+                        // Скрываем кнопку "Читать полностью"
+                        var trigger = document.querySelector('.read-more-trigger');
+                        trigger.style.display = 'none';
+                        // Можно добавить здесь другие действия при раскрытии текста
+                    } else {
+                        element.style.display = 'none';
+                        // Можно добавить здесь другие действия при скрытии текста
+                    }
+                }
+            </script>
+            <script>
+            </script>
+            <script>
+                function openProductDetails() {
+                    // Открывает новую страницу с подробной информацией о товаре
+                    window.open('product-details.html', '_blank');
+                }
+            </script>
+            <script>
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const slider = document.querySelector('.product-slider');
+                    const slides = slider.querySelectorAll('.product-block');
+                    let currentIndex = 0;
+
+                    function moveSlide(direction) {
+                        currentIndex += direction;
+
+                        if (currentIndex >= slides.length) {
+                            currentIndex = 0; // Возвращаемся к первому слайду
+                        } else if (currentIndex < 0) {
+                            currentIndex = slides.length - 1; // Переходим к последнему слайду
+                        }
+
+                        let totalOffset = 0;
+                        for (let i = 0; i < currentIndex; i++) {
+                            totalOffset += slides[i].offsetWidth; // Учитываем ширину каждого предыдущего слайда
+                        }
+
+                        let offset;
+                        // Задаем определенные значения смещения для каждого слайда
+                        if (currentIndex === 0) {
+                            offset = -100; // Смещение для первого слайда
+                        } else if (currentIndex === 1) {
+                            offset = -490; // Смещение для второго слайда
+                        } else if (currentIndex === 2) {
+                            offset = -880; // Смещение для третьего слайда
+                        } else if (currentIndex === 3) {
+                            offset = -1270; // Смещение для четвертого слайда
+                        } else if (currentIndex === 4) {
+                            offset = -1660; // Смещение для пятого слайда
+                        } else if (currentIndex === 5) {
+                            offset = -2050; // Смещение для шестого слайда
+                        }
+
+                        slider.style.transition = 'transform 0.7s ease';
+                        slider.style.transform = `translateX(${offset}px)`;
+                    }
+
+                    // Обработка клика на кнопку
+                    const nextslides = document.querySelector('.nextslides');
+                    nextslides.addEventListener('click', () => moveSlide(1));
+                });
+            </script>
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const slider2 = document.getElementById('product-slider-2');
+                    const slides2 = slider2.querySelectorAll('.product-block');
+                    let currentIndex2 = 0;
+
+                    function moveSlide(direction) {
+                        currentIndex2 += direction;
+
+                        if (currentIndex2 >= slides2.length) {
+                            currentIndex2 = 0; // Возвращаемся к первому слайду
+                        } else if (currentIndex2 < 0) {
+                            currentIndex2 = slides2.length - 1; // Переходим к последнему слайду
+                        }
+
+                        let totalOffset = 0;
+                        for (let i = 0; i < currentIndex2; i++) {
+                            totalOffset += slides2[i].offsetWidth; // Учитываем ширину каждого предыдущего слайда
+                        }
+
+                        let offset;
+                        // Задаем определенные значения смещения для каждого слайда
+                        if (currentIndex2 === 0) {
+                            offset = -100; // Смещение для первого слайда
+                        } else if (currentIndex2 === 1) {
+                            offset = -490; // Смещение для второго слайда
+                        } else if (currentIndex2 === 2) {
+                            offset = -880; // Смещение для третьего слайда
+                        } else if (currentIndex2 === 3) {
+                            offset = -1270; // Смещение для четвертого слайда
+                        } else if (currentIndex2 === 4) {
+                            offset = -1660; // Смещение для пятого слайда
+                        } else if (currentIndex2 === 5) {
+                            offset = -2050; // Смещение для шестого слайда
+                        }
+
+                        slider2.style.transition = 'transform 0.7s ease';
+                        slider2.style.transform = `translateX(${offset}px)`;
+                    }
+
+                    // Обработка клика на кнопку только для второй секции
+                    const nextslides2 = document.querySelector('.nextslides1');
+                    nextslides2.addEventListener('click', () => moveSlide(1));
+                });
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const slider3 = document.getElementById('product-slider-3');
+                    const slides3 = slider3.querySelectorAll('.product-block');
+                    let currentIndex3 = 0;
+
+                    function moveSlide(direction) {
+                        currentIndex3 += direction;
+
+                        if (currentIndex3 >= slides3.length) {
+                            currentIndex3 = 0; // Возвращаемся к первому слайду
+                        } else if (currentIndex3 < 0) {
+                            currentIndex3 = slides3.length - 1; // Переходим к последнему слайду
+                        }
+
+                        let totalOffset = 0;
+                        for (let i = 0; i < currentIndex3; i++) {
+                            totalOffset += slides3[i].offsetWidth; // Учитываем ширину каждого предыдущего слайда
+                        }
+
+                        let offset;
+                        // Задаем определенные значения смещения для каждого слайда
+                        if (currentIndex3 === 0) {
+                            offset = -100; // Смещение для первого слайда
+                        } else if (currentIndex3 === 1) {
+                            offset = -490; // Смещение для второго слайда
+                        } else if (currentIndex3 === 2) {
+                            offset = -880; // Смещение для третьего слайда
+                        } else if (currentIndex3 === 3) {
+                            offset = -1270; // Смещение для четвертого слайда
+                        } else if (currentIndex3 === 4) {
+                            offset = -1660; // Смещение для пятого слайда
+                        } else if (currentIndex3 === 5) {
+                            offset = -2050; // Смещение для шестого слайда
+                        }
+
+                        slider3.style.transition = 'transform 0.7s ease';
+                        slider3.style.transform = `translateX(${offset}px)`;
+                    }
+
+                    // Обработка клика на кнопку только для третьей секции
+                    const nextslides3 = document.querySelector('.nextslides2');
+                    nextslides3.addEventListener('click', () => moveSlide(1));
+                });
+            </script>
+            </script>
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const slider4 = document.getElementById('product-slider-4');
+                    const slides4 = slider4.querySelectorAll('.product-block');
+                    let currentIndex4 = 0;
+
+                    function moveSlide(direction) {
+                        currentIndex4 += direction;
+
+                        if (currentIndex4 >= slides4.length) {
+                            currentIndex4 = 0; // Возвращаемся к первому слайду
+                        } else if (currentIndex4 < 0) {
+                            currentIndex4 = slides4.length - 1; // Переходим к последнему слайду
+                        }
+
+                        let totalOffset = 0;
+                        for (let i = 0; i < currentIndex4; i++) {
+                            totalOffset += slides4[i].offsetWidth; // Учитываем ширину каждого предыдущего слайда
+                        }
+
+                        let offset;
+                        // Задаем определенные значения смещения для каждого слайда
+                        if (currentIndex4 === 0) {
+                            offset = -100; // Смещение для первого слайда
+                        } else if (currentIndex4 === 1) {
+                            offset = -490; // Смещение для второго слайда
+                        } else if (currentIndex4 === 2) {
+                            offset = -880; // Смещение для третьего слайда
+                        } else if (currentIndex4 === 3) {
+                            offset = -1270; // Смещение для четвертого слайда
+                        } else if (currentIndex4 === 4) {
+                            offset = -1660; // Смещение для пятого слайда
+                        } else if (currentIndex4 === 5) {
+                            offset = -2050; // Смещение для шестого слайда
+                        }
+
+                        slider4.style.transition = 'transform 0.7s ease';
+                        slider4.style.transform = `translateX(${offset}px)`;
+                    }
+
+                    // Обработка клика на кнопку только для третьей секции
+                    const nextslides4 = document.querySelector('.nextslides3');
+                    nextslides4.addEventListener('click', () => moveSlide(1));
+                });
+            </script>
+            <script>
+                const sliderImages = document.querySelectorAll('.imagenavigation')
+                const sliderElement = document.querySelector('.slider')
+                let currentSliden = 0;
+
+                function changeSlide(direction) {
+                    currentSlide += direction;
+                    if (currentSlide < 0) {
+                        currentSlide = sliderImages.length - 1;
+                    } else if (currentSlide >= sliderImages.length) {
+                        currentSlide = 0;
+                    }
+                    slider.style.transform = `translateX(-${currentSlide * sliderImages[0].clientWidth}px)`;
+                }
+                document.querySelector('.prev-btn').addEventListener('click', () => {
+                    changeSlide(-1);
+                })
+                document.querySelector('.next-btn').addEventListener('click', () => {
+                    changeSlide(1);
+                })
+
+                function changeSlide(direction) {
+                    if (direction === -1) {
+                        // User clicked "previous " button
+                        if (currentSlide === 0) {
+                            // If it's the first slide, return and don't change the slide
+                            return;
+                        }
+                        currentSlide--; // Decrease the index
+                    } else {
+                        // User clicked "next " button
+                        if (currentSlide === sliderImages.length - 1) {
+                            // If it's the last slide, reset the index to 0
+                            currentSlide = 0;
+                        } else {
+                            currentSlide++; // Increase the index
+                        }
+                    }
+                    sliderElement.style.transform = `translateX(-${currentSlide * sliderImages[0].clientWidth}px)`;
+                }
+            </script>
+            <script>
+                let currentSlide = 0;
+                const totalSlides = document.querySelectorAll('.slide').length;
+
+                function prevSlide() {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    updateSlider();
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    updateSlider();
+                }
+
+                function updateSlider() {
+                    const slideWidth = document.querySelector('.review').offsetWidth + 20; // 20px - margin-right
+                    const newTransformValue = -currentSlide * slideWidth + 'px';
+                    document.querySelector('.slides').style.transform = 'translateX(' + newTransformValue + ')';
+                }
+            </script>
+            </script>
+
+            </script>
+            </script>
+            </script>
+            <script>
+            </script>
+</body>
+
+</html>
